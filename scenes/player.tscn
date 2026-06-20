@@ -3,6 +3,9 @@
 [ext_resource type="Script" uid="uid://glxlr3w1g0ju" path="res://script/player.gd" id="1_g2els"]
 [ext_resource type="Texture2D" uid="uid://cli307ab8cdka" path="res://art/Characters/Basic Charakter Spritesheet.png" id="2_qhqgy"]
 [ext_resource type="Texture2D" uid="uid://dp3y55fo5gwnt" path="res://art/Characters/Basic Charakter Actions.png" id="3_qhqgy"]
+[ext_resource type="Script" uid="uid://cevhdg5kfhm61" path="res://script/state_machine/node_state_machine.gd" id="4_tuyoq"]
+[ext_resource type="Script" uid="uid://b6vs6xvfu1uv1" path="res://scenes/chopping_state.gd" id="5_fjrip"]
+[ext_resource type="Script" uid="uid://cdvo56an7a3je" path="res://scenes/idle_state.gd" id="6_smehm"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_g2els"]
 radius = 4.0
@@ -459,3 +462,15 @@ shape = SubResource("CircleShape2D_g2els")
 position = Vector2(0, -7)
 sprite_frames = SubResource("SpriteFrames_2wuci")
 animation = &"watering_right"
+
+[node name="StateMachine" type="Node" parent="." unique_id=1647122586 node_paths=PackedStringArray("initial_node_state")]
+script = ExtResource("4_tuyoq")
+initial_node_state = NodePath("Idle")
+
+[node name="Chopping" type="Node" parent="StateMachine" unique_id=909419809]
+script = ExtResource("5_fjrip")
+
+[node name="Idle" type="Node" parent="StateMachine" unique_id=49790954 node_paths=PackedStringArray("player", "animated_sprite_2d")]
+script = ExtResource("6_smehm")
+player = NodePath("../..")
+animated_sprite_2d = NodePath("../../AnimatedSprite2D")
